@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body ng-controller="DirectiveController">
+  <button ng-click="clickUnfocused()">
+     No focus
+  </button>
+  <button ngbk-focus ng-click="clickFocused()">
+     I am focus
+  </button>
+  <div>{{message.text}} </div>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.directive('ngbkFocus', function() {
+	    return {
+		    link: function(scope, element, attrs, controller) {
+			    element[0].focus();
+			}
+		};
+	});
+	myAppModule.controller('DirectiveController', function ($scope, $http) {
+	   $scope.message = {text: 'nothing clicked yet'};
+	   $scope.clickUnfocused = function() {
+	       $scope.message.text = 'unfocused button clicked';
+	   }
+	   $scope.clickFocused = function() {
+	       $scope.message.text = 'focus button clicked';
+	   }
+	});
+  </script>
+</body>
+</html>

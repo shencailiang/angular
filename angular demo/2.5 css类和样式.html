@@ -1,0 +1,88 @@
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	   .error{
+	       background: red;
+	   }
+	   .warning{
+	       background: yellow;
+	   }
+	   .green {
+	       background: green;
+	   }
+	   .border11 {
+	       border: 2px solid red;
+	   }
+	   .selected {
+	      background: lightgreen;
+	   }
+	</style>
+</head>
+<body >
+<div ng-controller="HeadController">
+    <div ng-class="{error: isError, warning: isWarning}">{{messageText}}</div>
+	<div ng-class='["green","border11"]'>nisfhsi </div>
+	<div ng-class='"green border11"'>nisfhsi </div>
+	<div ng-class="{warning: true}">525235</div>
+	<button ng-click="showError()">controll menu show rrror</button>
+	<button ng-click="showWarning()">controll menu show waning</button>
+</div>
+ 
+ <table ng-controller="TableController">
+ <tr ng-repeat="student in students" ng-click = "selectStudent($index)" ng-class="{selected: arr[$index]}">
+     <td ng-bind="student.id"></td>
+	 <td>{{student.name}}</td>
+ </tr>
+ </table>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('HeadController', function ($scope, $timeout, $interval) {
+	    $scope.isError = false;
+		$scope.isWarning = false;
+		
+		$scope.showError = function () {
+		    $scope.messageText = 'this is a error';
+			$scope.isError = true;
+		    $scope.isWarning = false;
+		};
+		$scope.showWarning = function () {
+		    $scope.messageText = 'this is a warning';
+			$scope.isError = false;
+		    $scope.isWarning = true;
+		};
+	});
+	myAppModule.controller('TableController', function ($scope, $timeout, $interval) {
+		 var students = [
+		    {name: 'li lei', id:1},
+			{name: 'wuming', id:2},
+			{name: 'zhangjun', id:3},
+			{name: 'shenzhiyi', id:4},
+		];
+		$scope.students = students;
+		$scope.selectStudent = function (row) {
+		    $scope.selectedRow = row;
+		};
+	});
+	
+	myAppModule.controller('TableController', function ($scope, $timeout, $interval) {
+		 var students = [
+		    {name: 'li lei', id:1},
+			{name: 'wuming', id:2},
+			{name: 'zhangjun', id:3},
+			{name: 'shenzhiyi', id:4},
+		];
+		$scope.students = students;
+		$scope.arr = {};
+		$scope.selectStudent = function (row) {
+		    $scope.selectedRow = row;
+			$scope.arr[row] = true;
+		};
+	});
+	
+  </script>
+</body>
+</html>

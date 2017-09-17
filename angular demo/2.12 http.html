@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body >
+  <ul ng-controller="HttpController">
+      <li ng-repeat="student in students">
+	 <!-- <a ng-bind="student.name"></a> -->
+	 <a >{{student.id + ' ' + student.name}}</a>
+	  </li>
+  </ul>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('HttpController', function ($scope, $http) {
+	    $http.get('data.json').then(function (res) {
+		   
+		    $scope.students = res.data;
+		}).catch(function (error) {
+		    console.log(error);
+		});
+	});
+  </script>
+</body>
+</html>

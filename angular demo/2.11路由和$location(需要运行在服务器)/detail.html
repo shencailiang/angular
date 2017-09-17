@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="myEmail">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<style>
+	  
+	</style>
+</head>
+<body >
+     <div><strong>主题:</strong>{{message.subject}}</div>
+	 <div><strong>发送者:</strong>{{message.sender}}</div>
+	 <div><strong>日期:</strong>{{message.date}}</div>
+	 <div>
+	     <strong> To:</strong>
+		 <span ng-repeat="recipient in message.recipients">{{recipient}}</span>
+	 </div>
+	 <div>{{message.message}}</div>
+	 <a href="#!/">Back to messge list</a>
+</body>
+</html>

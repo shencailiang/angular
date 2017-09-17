@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myEmail">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<style>
+	  
+	</style>
+</head>
+<body >
+   <table>
+       <thead>
+		   <tr>
+			   <th>发送者</th>
+			   <th>主题</th>
+			   <th>日期</th>
+		   </tr>
+	   </thead>
+	   <tbody>
+	       <tr ng-repeat="message in messages">
+		       <td>{{message.sender}}</td>
+			   <td><a href='#/view/{{message.id}}' target="_self">详细内容:  </a>{{message.subject}}</td>
+			   <td>{{message.date}}</td>
+		   </tr>
+	   </tbody>
+   </table>
+ 
+</body>
+</html>

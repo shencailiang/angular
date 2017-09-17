@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body ng-controller = "TextController">
+  <p ng-bind="someText.message"></p>
+  <form ng-submit="requestCasing()">
+      <input type="text"   ng-model="inputValue"/>
+      <input type="checkbox" ng-model="boolean"/>
+	  <button>click me startup</button>
+	  <button ng-click="reset()">reset me </button>
+  </form>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('TextController', function ($scope, $timeout, $interval) {
+	    var someText = {
+		    message: '我是身材'
+		};
+		$scope.someText = someText;
+		var calModel = function () {
+		     $scope.someText.message = $scope.inputValue * 20;
+		};
+		$scope.inputValue = 10;
+		$scope.$watch('inputValue', calModel);
+		$scope.requestCasing = function () {
+		    console.log($scope);
+		};
+		$scope.reset = function () {
+		    $scope.inputValue = 0;
+		};
+	});
+  </script>
+</body>
+</html>

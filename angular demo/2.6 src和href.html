@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body >
+  <img ng-src={{imgSrc}} ng-controller = "ImgController"/>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('ImgController', function ($scope, $timeout, $interval) {
+	    $scope.imgSrc = 'loading.gif';
+	});
+  </script>
+</body>
+</html>

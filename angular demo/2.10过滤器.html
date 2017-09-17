@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body >
+  <div ng-controller="FilterController">
+       <div>{{myTitle | titleCase}}</div>
+  </div>
+  <script>
+    // 声明模块和它依赖的模块
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.filter('titleCase', function() {
+	    var titleCaseFilter = function (input) {
+		    var words = input.split(' ');
+			for (var i = 0, curWord; i < words.length; i++) {
+			    curWord = words[i];
+			    words[i] = curWord.charAt(0).toUpperCase() + curWord.slice(1); 
+			}
+			return words.join(' ');
+		};
+		return titleCaseFilter;
+	})
+	myAppModule.controller('FilterController', function ($scope) {	    
+	    $scope.myTitle = 'my name is shen cai liang, I love zhang jun';
+	});
+  </script>
+</body>
+</html>

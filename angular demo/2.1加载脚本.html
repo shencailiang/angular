@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body ng-controller = "TextController">
+  <p ng-bind="someText.message"></p>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('TextController', function ($scope) {
+	    var someText = {
+		    message: '我是身材'
+		};
+		$scope.someText = someText;
+	});
+   /* function TextController($scope) {
+	   var someText = "我是沈才良";
+	   $scope.someText = someText;
+	}*/
+  </script>
+</body>
+</html>

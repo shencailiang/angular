@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body ng-controller="MenuController">
+ <button ng-click="toggleMenu()">controll menu show</button>
+  <ul ng-show="menuShow">
+      <li ng-repeat="student in students">
+	 <!-- <a ng-bind="student.name"></a> -->
+	 <a >{{student.id + ' ' + student.name}}</a>
+	  </li>	 
+  </ul>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	
+	myAppModule.controller('MenuController', function ($scope, $timeout, $interval) {
+	    var students = [
+		    {name: 'li lei', id:1},
+			{name: 'wuming', id:2},
+			{name: 'zhangjun', id:3},
+			{name: 'shenzhiyi', id:4},
+		];
+		$scope.students = students;
+		$scope.insertPerson = function () {
+		    students.splice(1,0,{name:'wo shi shui', id: 5}); 
+		};
+		$scope.toggleMenu = function () {
+		    $scope.menuShow = $scope.menuShow ? false : true;
+		};
+		$scope.menuShow = true;
+	});
+  </script>
+</body>
+</html>

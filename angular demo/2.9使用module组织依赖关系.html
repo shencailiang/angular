@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="" rel="stylesheet" type="text/html"/>
+	<script src="angular.js"></script>
+	<style>
+	  
+	</style>
+</head>
+<body >
+  <div ng-controller="CarController">
+       <div ng-repeat="item in items">
+	      <span>{{item.tile}}</span>
+		  <input ng-model="item.quantity">
+		  <span>{{item.price | currency}}</span>
+		  <span>{{item.price * item.quantity | currency}}</span>
+	   </div>
+	  <!-- <div>Total:{{totalCart() | currency}}</div>
+	   <div>Discount:{{bill.discount | currency}}</div>
+	   <div>Subtotal:{{subtotal() | currency}}</div> -->
+	   <div>Total:{{bill.total | currency}}</div>
+	   <div>Discount:{{bill.discount | currency}}</div>
+	   <div>Subtotal:{{bill.subtotal | currency}}</div>
+	   <button ng-click="items[0].quantity = 1;">click me</button>
+  </div>
+  <script>
+    var myAppModule = angular.module('myApp', []);
+	//factory方法
+	myAppModule.factory('Items', function() {
+	    var items = {};
+		items.query = function () {
+		    return [
+			    {title: '苹果', quantity: 8, price: 3.95},
+				{title: '栗子', quantity: 17, price: 12.95},
+				{title: '香蕉', quantity: 5, price: 6.95},
+			];
+		};
+		return items;
+	});
+	/*myAppModule.provider('Items', function ItemsQuery() {
+	   this.$get = function( ) {
+	       return [
+			    {title: '苹果', quantity: 8, price: 3.95},
+				{title: '栗子', quantity: 17, price: 12.95},
+				{title: '香蕉', quantity: 5, price: 6.95},
+			];
+	   };
+	});*/
+	
+	/*myAppModule.service('Items', function ItemsQuery() {
+	   this.$get = function( ) {
+	       return [
+			    {title: '苹果', quantity: 8, price: 3.95},
+				{title: '栗子', quantity: 17, price: 12.95},
+				{title: '香蕉', quantity: 5, price: 6.95},
+			];
+	   };
+	});*/
+	myAppModule.controller('CarController', function ($scope, Items) {	    
+	    $scope.bill = {};
+		//service 
+		//$scope.items = Items.$get();
+		//provider
+		//$scope.items = Items;
+		//factory
+		$scope.items = Items.query();
+		function calculateTotal() {
+		    var total = 0;
+			console.log(total);
+			for(var i = 0, len = $scope.items.length, curItem; i < len; i++) {
+			    curItem = $scope.items[i];
+				total = total + curItem.quantity * curItem.price;
+			} 
+			$scope.bill.total = total;
+			$scope.bill.discount = total > 100 ? 10 : 0;
+			$scope.bill.subtotal = total - $scope.bill.discount;
+		};
+		$scope.$watch('items', calculateTotal, true);
+	});
+  </script>
+</body>
+</html>
